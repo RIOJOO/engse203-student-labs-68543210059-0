@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ENGSE203 LAB 3</title>
+  <script type="module" crossorigin src="/engse203-student-labs-685432100285/labs/week-03/assets/index-DXT2BOcY.js"></script>
+  <link rel="stylesheet" crossorigin href="/engse203-student-labs-685432100285/labs/week-03/assets/index-4Y3DbP4m.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="container">
+      <p class="eyebrow">ENGSE203 • LAB 3</p>
+      <h1>Campus Service Request</h1>
+      <p>Responsive Web UI, Event and Form</p>
+    </div>
+  </header>
+
+  <main class="container page-grid">
+    <section class="panel" aria-labelledby="form-title">
+      <h2 id="form-title">Create Service Request</h2>
+      <form id="request-form" novalidate>
+        <!-- TODO 1: Requester Name field -->
+        <div class="field">
+          <label for="requester-name">Requester Name</label>
+          <input id="requester-name" name="requesterName" type="text" minlength="2"
+            placeholder="Enter your name" aria-describedby="requesterName-hint requesterName-error" required />
+          <small id="requesterName-hint" class="hint">At least 2 characters</small>
+          <small id="requesterName-error" class="error"></small>
+        </div>
+
+        <!-- TODO 2: Request Type select -->
+        <div class="field">
+          <label for="request-type">Request Type</label>
+          <select id="request-type" name="requestType" aria-describedby="requestType-error" required>
+            <option value="">-- Select request type --</option>
+            <option value="IT Support">IT Support</option>
+            <option value="Building and Facilities">Building and Facilities</option>
+            <option value="Academic Services">Academic Services</option>
+            <option value="Other">Other</option>
+          </select>
+          <small id="requestType-error" class="error"></small>
+        </div>
+
+        <!-- TODO 3: Details textarea -->
+        <div class="field">
+          <label for="request-details">Details</label>
+          <textarea id="request-details" name="details" rows="5" minlength="10"
+            placeholder="Describe the service or problem" aria-describedby="details-hint details-error" required></textarea>
+          <small id="details-hint" class="hint">At least 10 characters</small>
+          <small id="details-error" class="error"></small>
+        </div>
+        <button type="submit">Submit Request</button>
+        <p id="form-status" class="status" role="status"></p>
+      </form>
+    </section>
+
+    <aside class="panel preview-panel" aria-labelledby="preview-title">
+      <h2 id="preview-title">Live Preview</h2>
+      <dl id="preview" aria-live="polite">
+        <div><dt>Name</dt><dd id="preview-name">ยังไม่ระบุชื่อ</dd></div>
+        <div><dt>Type</dt><dd id="preview-type">ยังไม่เลือกประเภท</dd></div>
+        <div><dt>Details</dt><dd id="preview-details">ยังไม่มีรายละเอียด</dd></div>
+      </dl>
+      <h3>Submitted Requests</h3>
+      <ul id="request-list" class="request-list"></ul>
+    </aside>
+  </main>
+</body>
+</html>
