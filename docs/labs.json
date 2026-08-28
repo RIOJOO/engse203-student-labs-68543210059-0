@@ -13,7 +13,7 @@
     "pageUrl": "https://RIOJOO.github.io/engse203-student-labs-685432100590/labs/week-01/",
     "sourceUrl": "https://github.com/RIOJOO/engse203-student-labs-685432100590/tree/lab/week-01/labs/week-01/source",
     "hasPublish": false,
-    "sourceEntries": 3
+    "sourceEntries": 5
   },
   {
     "week": "week-02",
@@ -29,38 +29,38 @@
     "pageUrl": "https://RIOJOO.github.io/engse203-student-labs-685432100590/labs/week-02/",
     "sourceUrl": "https://github.com/RIOJOO/engse203-student-labs-685432100590/tree/lab/week-02/labs/week-02/source",
     "hasPublish": true,
-    "sourceEntries": 9
+    "sourceEntries": 8
   },
   {
     "week": "week-03",
     "title": "Responsive Web UI & Form Interaction",
-    "status": "draft",
+    "status": "submitted",
     "sourceOrigin": "course-starter",
     "originalRepoUrl": "",
     "originalCommit": "",
-    "pullRequestUrl": "",
-    "submissionTag": "",
-    "testStatus": "not-tested",
-    "notes": "Static site ต้องมี index.html ที่ publish root",
+    "pullRequestUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0/pull/2",
+    "submissionTag": "lab-03-submission-v1",
+    "testStatus": "pass",
+    "notes": "npm check และ build ผ่าน ทดสอบ Desktop, Mobile 375px, validation, live preview, submit interaction และ Console แล้ว",
     "pageUrl": "https://RIOJOO.github.io/engse203-student-labs-685432100590/labs/week-03/",
     "sourceUrl": "https://github.com/RIOJOO/engse203-student-labs-685432100590/tree/lab/week-03/labs/week-03/source",
     "hasPublish": false,
-    "sourceEntries": 0
+    "sourceEntries": 4
   },
   {
     "week": "week-04",
     "title": "React Campus Service Request",
-    "status": "draft",
+    "status": "submitted",
     "sourceOrigin": "course-starter",
     "originalRepoUrl": "",
     "originalCommit": "",
     "pullRequestUrl": "",
-    "submissionTag": "",
-    "testStatus": "not-tested",
+    "submissionTag": "lab-04-submission-v1",
+    "testStatus": "pass",
     "notes": "React/Vite build output ต้องอยู่ใน publish/ ก่อนสร้าง Pages Hub",
     "pageUrl": "https://RIOJOO.github.io/engse203-student-labs-685432100590/labs/week-04/",
     "sourceUrl": "https://github.com/RIOJOO/engse203-student-labs-685432100590/tree/lab/week-04/labs/week-04/source",
-    "hasPublish": false,
-    "sourceEntries": 0
+    "hasPublish": true,
+    "sourceEntries": 5
   }
 ]
