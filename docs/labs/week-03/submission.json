@@ -11,6 +11,6 @@
   "notes": "npm check และ build ผ่าน ทดสอบ Desktop, Mobile 375px, validation, live preview, submit interaction และ Console แล้ว",
   "pageUrl": "https://RIOJOO.github.io/engse203-student-labs-685432100590/labs/week-03/",
   "sourceUrl": "https://github.com/RIOJOO/engse203-student-labs-685432100590/tree/lab/week-03/labs/week-03/source",
-  "hasPublish": false,
+  "hasPublish": true,
   "sourceEntries": 4
 }
