@@ -1,69 +1,126 @@
 <!doctype html>
 <html lang="th">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ENGSE203 LAB 3</title>
-  <script type="module" src="/src/main.js"></script>
-</head>
-<body>
-  <header class="hero">
-    <div class="container">
-      <p class="eyebrow">ENGSE203 • LAB 3</p>
-      <h1>Campus Service Request</h1>
-      <p>Responsive Web UI, Event and Form</p>
-    </div>
-  </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ENGSE203 Pre-LAB 3</title>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="container">
+        <p class="eyebrow">ENGSE203 • PRE-LAB 3</p>
+        <h1>Campus Service Request</h1>
+        <p>Lab 3 • Responsive Web UI + Event + Form</p>
+      </div>
+    </header>
 
-  <main class="container page-grid">
-    <section class="panel" aria-labelledby="form-title">
-      <h2 id="form-title">Create Service Request</h2>
-      <form id="request-form" novalidate>
-        <!-- TODO 1: Requester Name field -->
-        <div class="field">
-          <label for="requester-name">Requester Name</label>
-          <input id="requester-name" name="requesterName" type="text" minlength="2"
-            placeholder="Enter your name" aria-describedby="requesterName-hint requesterName-error" required />
-          <small id="requesterName-hint" class="hint">At least 2 characters</small>
-          <small id="requesterName-error" class="error"></small>
+    <main class="container page-grid">
+      <section class="panel full-width">
+        <div class="status-panel">
+          <div>
+            <h3>Total Request</h3>
+            <p>12</p>
+          </div>
+          <div>
+            <h3>Pending</h3>
+            <p>4</p>
+          </div>
+          <div>
+            <h3>Approve</h3>
+            <p>8</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="form-title">
+        <h2 id="form-title">Create Service Request</h2>
+
+        <form id="request-form" novalidate>
+          <div class="field">
+            <label for="display-name">Requester Name</label>
+            <input
+              id="display-name"
+              name="displayName"
+              type="text"
+              minlength="2"
+              placeholder="ชื่อ : รหัสนักศึกษา 68432..."
+              aria-describedby="displayName-hint displayName-error"
+              required
+            />
+            <small id="displayName-hint" class="hint"
+              >Minimum 2 characters required</small
+            >
+            <small id="displayName-error" class="error"></small>
+          </div>
+
+          <div class="field">
+            <label for="request-type">Request Type</label>
+            <select
+              id="request-type"
+              name="requestType"
+              aria-describedby="requestType-error"
+              required
+            >
+              <option value="">-- Select a type --</option>
+              <option value="เครือข่าย">เครือข่าย</option>
+              <option value="เอกสาร">เอกสาร</option>
+              <option value="สถานที่">สถานที่</option>
+              <option value="ซ่อมบำรุง">ซ่อมบำรุง</option>
+            </select>
+            <small id="requestType-error" class="error"></small>
+          </div>
+
+          <div class="field">
+            <label for="request-details">Details</label>
+            <textarea
+              id="request-details"
+              name="requestDetails"
+              rows="5"
+              minlength="10"
+              placeholder="ระบุรายละเอียดคำร้องขอ..."
+              aria-describedby="requestDetails-hint requestDetails-error"
+              required
+            ></textarea>
+            <div class="field-meta">
+              <small id="requestDetails-hint" class="hint"
+                >อย่างน้อย 10 ตัวอักษร</small
+              >
+              <small id="goal-count" class="counter" aria-live="polite"
+                >0 ตัวอักษร</small
+              >
+            </div>
+            <small id="requestDetails-error" class="error"></small>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Submit Request</button>
+          </div>
+          <p id="form-status" class="status" role="status"></p>
+        </form>
+      </section>
+
+      <aside class="panel preview-panel" aria-labelledby="preview-title">
+        <h2 id="preview-title"><b>Live Preview</b></h2>
+        <h3><b>Form Status</b></h3>
+
+        <div id="preview-status" class="box idle">พร้อมสำหรับการกรอกข้อมูล</div>
+
+        <div class="preview-item">
+          <h4><b>ชื่อผู้ยื่นคำร้อง: </b></h4>
+          <p id="preview-name" class="box">ยังไม่ได้ระบุชื่อ</p>
         </div>
 
-        <!-- TODO 2: Request Type select -->
-        <div class="field">
-          <label for="request-type">Request Type</label>
-          <select id="request-type" name="requestType" aria-describedby="requestType-error" required>
-            <option value="">-- Select request type --</option>
-            <option value="IT Support">IT Support</option>
-            <option value="Building and Facilities">Building and Facilities</option>
-            <option value="Academic Services">Academic Services</option>
-            <option value="Other">Other</option>
-          </select>
-          <small id="requestType-error" class="error"></small>
+        <div class="preview-item">
+          <h4><b>ประเภทคำร้อง: </b></h4>
+          <p id="preview-role" class="box">ยังไม่เลือกประเภทคำร้อง</p>
         </div>
 
-        <!-- TODO 3: Details textarea -->
-        <div class="field">
-          <label for="request-details">Details</label>
-          <textarea id="request-details" name="details" rows="5" minlength="10"
-            placeholder="Describe the service or problem" aria-describedby="details-hint details-error" required></textarea>
-          <small id="details-hint" class="hint">At least 10 characters</small>
-          <small id="details-error" class="error"></small>
+        <div class="preview-item">
+          <h4><b>รายละเอียด: </b></h4>
+          <p id="preview-goal" class="box">ยังไม่มีรายละเอียดคำร้อง</p>
         </div>
-        <button type="submit">Submit Request</button>
-        <p id="form-status" class="status" role="status"></p>
-      </form>
-    </section>
-
-    <aside class="panel preview-panel" aria-labelledby="preview-title">
-      <h2 id="preview-title">Live Preview</h2>
-      <dl id="preview" aria-live="polite">
-        <div><dt>Name</dt><dd id="preview-name">ยังไม่ระบุชื่อ</dd></div>
-        <div><dt>Type</dt><dd id="preview-type">ยังไม่เลือกประเภท</dd></div>
-        <div><dt>Details</dt><dd id="preview-details">ยังไม่มีรายละเอียด</dd></div>
-      </dl>
-      <h3>Submitted Requests</h3>
-      <ul id="request-list" class="request-list"></ul>
-    </aside>
-  </main>
-</body>
+      </aside>
+    </main>
+  </body>
 </html>
