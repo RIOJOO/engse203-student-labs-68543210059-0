@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ENGSE203 Pre-LAB 3</title>
+    <script type="module" src="/src/main.js"></script>
+  </head>
+  <body>
+    <header class="hero">
+      <div class="container">
+        <p class="eyebrow">ENGSE203 • PRE-LAB 3</p>
+        <h1>Campus Service Request</h1>
+        <p>Lab 3 • Responsive Web UI + Event + Form</p>
+      </div>
+    </header>
+
+    <main class="container page-grid">
+      <section class="panel full-width">
+        <div class="status-panel">
+          <div>
+            <h3>Total Request</h3>
+            <p>12</p>
+          </div>
+          <div>
+            <h3>Pending</h3>
+            <p>4</p>
+          </div>
+          <div>
+            <h3>Approve</h3>
+            <p>8</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="panel" aria-labelledby="form-title">
+        <h2 id="form-title">Create Service Request</h2>
+
+        <form id="request-form" novalidate>
+          <div class="field">
+            <label for="display-name">Requester Name</label>
+            <input
+              id="display-name"
+              name="displayName"
+              type="text"
+              minlength="2"
+              placeholder="ชื่อ : รหัสนักศึกษา 68432..."
+              aria-describedby="displayName-hint displayName-error"
+              required
+            />
+            <small id="displayName-hint" class="hint"
+              >Minimum 2 characters required</small
+            >
+            <small id="displayName-error" class="error"></small>
+          </div>
+
+          <div class="field">
+            <label for="request-type">Request Type</label>
+            <select
+              id="request-type"
+              name="requestType"
+              aria-describedby="requestType-error"
+              required
+            >
+              <option value="">-- Select a type --</option>
+              <option value="เครือข่าย">เครือข่าย</option>
+              <option value="เอกสาร">เอกสาร</option>
+              <option value="สถานที่">สถานที่</option>
+              <option value="ซ่อมบำรุง">ซ่อมบำรุง</option>
+            </select>
+            <small id="requestType-error" class="error"></small>
+          </div>
+
+          <div class="field">
+            <label for="request-details">Details</label>
+            <textarea
+              id="request-details"
+              name="requestDetails"
+              rows="5"
+              minlength="10"
+              placeholder="ระบุรายละเอียดคำร้องขอ..."
+              aria-describedby="requestDetails-hint requestDetails-error"
+              required
+            ></textarea>
+            <div class="field-meta">
+              <small id="requestDetails-hint" class="hint"
+                >อย่างน้อย 10 ตัวอักษร</small
+              >
+              <small id="goal-count" class="counter" aria-live="polite"
+                >0 ตัวอักษร</small
+              >
+            </div>
+            <small id="requestDetails-error" class="error"></small>
+          </div>
+
+          <div class="actions">
+            <button type="submit">Submit Request</button>
+          </div>
+          <p id="form-status" class="status" role="status"></p>
+        </form>
+      </section>
+
+      <aside class="panel preview-panel" aria-labelledby="preview-title">
+        <h2 id="preview-title"><b>Live Preview</b></h2>
+        <h3><b>Form Status</b></h3>
+
+        <div id="preview-status" class="box idle">พร้อมสำหรับการกรอกข้อมูล</div>
+
+        <div class="preview-item">
+          <h4><b>ชื่อผู้ยื่นคำร้อง: </b></h4>
+          <p id="preview-name" class="box">ยังไม่ได้ระบุชื่อ</p>
+        </div>
+
+        <div class="preview-item">
+          <h4><b>ประเภทคำร้อง: </b></h4>
+          <p id="preview-role" class="box">ยังไม่เลือกประเภทคำร้อง</p>
+        </div>
+
+        <div class="preview-item">
+          <h4><b>รายละเอียด: </b></h4>
+          <p id="preview-goal" class="box">ยังไม่มีรายละเอียดคำร้อง</p>
+        </div>
+      </aside>
+    </main>
+  </body>
+</html>

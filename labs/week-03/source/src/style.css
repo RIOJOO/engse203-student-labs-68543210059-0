@@ -1,0 +1,310 @@
+/* ==========================================================================
+   1. RESET & BASE
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  color-scheme: light;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, rgb(0, 0, 0), #ebe8e8);
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+
+/* ==========================================================================
+   2. DESIGN TOKENS
+   ========================================================================== */
+
+:root {
+  /* Colors */
+  --navy: #09265d;
+  --blue: #1d63d5;
+  --cyan: #16b8d4;
+  --yellow: #f3c64d;
+  --text: #14213a;
+  --muted: #5b6b85;
+  --surface: #ffffff;
+  --surface-alt: #eff7ff;
+  --background: #f4f7fc;
+  --border: #cbd9ef;
+  --danger: #b42318;
+  --success: #157347;
+
+  /* Effects */
+  --shadow: 0 18px 45px rgb(26 58 112 / 0.12);
+  --radius: 1.15rem;
+}
+
+
+/* ==========================================================================
+   3. LAYOUT
+   ========================================================================== */
+
+.container {
+  width: min(100% - 2rem, 72rem);
+  margin-inline: auto;
+}
+
+.hero {
+  color: white;
+  background: linear-gradient(180deg, rgb(8, 8, 8), #d4d3e2);
+  padding: 2.25rem 0 2.5rem;
+  border-bottom: 6px solid black;
+}
+
+.eyebrow {
+  margin: 0 0 .45rem;
+  font-size: .8rem;
+  font-weight: 850;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: clamp(2.15rem, 7vw, 4rem);
+  line-height: 1.05;
+}
+
+.page-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding-block: 1.25rem 2.5rem;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.2rem;
+  box-shadow: var(--shadow);
+  border-color: 50px solid var(--border);
+}
+
+.full-width {
+  grid-column: 1 / -1;
+}
+
+
+/* ==========================================================================
+   4. FORMS
+   ========================================================================== */
+
+.field {
+  display: grid;
+  gap: .45rem;
+  margin-bottom: 1rem;
+}
+
+.field label {
+  font-weight: 750;
+}
+
+.field-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+input,
+select,
+textarea {
+  width: 100%;
+  border: 1px solid #9eb2d2;
+  border-radius: .75rem;
+  background: white;
+  color: var(--text);
+  padding: .8rem .9rem;
+}
+
+textarea {
+  resize: vertical;
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--blue);
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+button:focus-visible {
+  outline: 3px solid var(--yellow);
+  outline-offset: 2px;
+}
+
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: var(--danger);
+  background: #fff8f7;
+}
+
+.hint,
+.counter {
+  color: var(--muted);
+}
+
+.error {
+  min-height: 1.2rem;
+  color: var(--danger);
+  font-weight: 650;
+}
+
+
+/* ==========================================================================
+   5. BUTTONS & ACTIONS
+   ========================================================================== */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+button {
+  border: 0;
+  border-radius: .75rem;
+  padding: .78rem 1.05rem;
+  font-weight: 800;
+  color: white;
+  background: linear-gradient(135deg, blue, #b53eda);
+  cursor: pointer;
+  box-shadow: 0 8px 18px rgb(29 99 213 / .2);
+}
+
+button:hover {
+  transform: translateY(-1px);
+}
+
+
+/* ==========================================================================
+   6. STATUS INDICATORS */
+
+.status {
+  min-height: 1.5rem;
+  margin: .9rem 0 0;
+  font-weight: 750;
+}
+
+.status[data-state="invalid"] {
+  color: var(--danger);
+}
+
+.status[data-state="success"] {
+  color: var(--success);
+}
+
+.status[data-state="idle"] {
+  color: var(--muted);
+}
+
+.status-panel {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  text-align: left;
+}
+
+.status-panel div {
+  background: linear-gradient(135deg, rgb(224, 224, 235), #000000);
+  border: 3px solid var(--success);
+  border-radius: var(--radius);
+  padding: 1rem;
+  box-shadow: var(--shadow);
+  color: var(--text);
+  font: serif; 
+}
+
+/* Generic message box (success / invalid / idle states) */
+.box {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  /*new line word */
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+.box.success {
+  border: 2px solid var(--success);
+  background-color: #e6f4ea;
+  color: var(--success);
+}
+
+.box.invalid {
+  border: 2px solid var(--danger);
+  background-color: #fdecea;
+  color: var(--danger);
+}
+
+.box.idle {
+  border: 2px dashed var(--muted);
+  background-color: #f9f9f9;
+  color: var(--muted);
+}
+
+
+/* ==========================================================================
+   7. PREVIEW PANEL
+   ========================================================================== */
+
+.preview-panel {
+  border: 2px solid var(--success);
+  background: rgb(174, 231, 174);
+}
+
+.preview-panel h2,
+.preview-panel h3 {
+  color: rgb(28, 80, 28);
+}
+
+.preview-item h4 {
+  color: rgb(28, 80, 28);
+  margin-bottom: -0.5rem;
+}
+
+
+/* 8. RESPONSIVE*/
+
+@media (min-width: 48rem) {
+  .page-grid {
+    grid-template-columns: minmax(0, 1.5fr) minmax(20rem, 1fr);
+    align-items: start;
+    gap: 1.25rem;
+    padding-top: 1.6rem;
+  }
+
+  .panel {
+    padding: 1.5rem;
+  }
+
+  .preview-panel {
+    position: sticky;
+    top: 1rem;
+  }
+}

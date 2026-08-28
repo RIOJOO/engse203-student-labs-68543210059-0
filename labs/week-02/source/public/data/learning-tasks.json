@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Setup Development Environment",
+    "topic": "Tools & Setup",
+    "status": "Done"
+  },
+  {
+    "id": 2,
+    "title": "HTML & CSS Semantic Layout",
+    "topic": "Web Fundamentals",
+    "status": "In progress"
+  },
+  {
+    "id": 3,
+    "title": "Asynchronous JavaScript & Fetch API",
+    "topic": "JavaScript",
+    "status": "To do"
+  },
+  {
+    "id": 4,
+    "title": "Component-based UI Design",
+    "topic": "Frontend Architecture",
+    "status": "To do"
+  }
+]
