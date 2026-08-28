@@ -1,100 +1,77 @@
-import { useState } from 'react'
+import { useState } from "react";
+import AppHeader from "./components/AppHeader.jsx";
+import SummaryPanel from "./components/SummaryPanel.jsx";
+import RequestForm from "./components/RequestForm.jsx";
+import FilterBar from "./components/FilterBar.jsx";
+import RequestList from "./components/RequestList.jsx";
+import { initialRequests } from "./data/initialRequests.js";
 
-const initialRequests = [
-  { id: '1', title: 'Air Conditioner Repair', location: 'Building 4, Room 402', priority: 'High', status: 'Pending' },
-  { id: '2', title: 'Projector Bulb Replacement', location: 'Library Room 2', priority: 'Medium', status: 'In Progress' }
-]
+function App() {
+  // TODO LAB4-R04: เปลี่ยน requests/statusFilter เป็น state
+  const [requests, setRequests] = useState(initialRequests);
+  const [statusFilter, setStatusFilter] = useState("all");
 
-export default function App() {
-  const [requests, setRequests] = useState(initialRequests)
-  const [title, setTitle] = useState('')
-  const [location, setLocation] = useState('')
-  const [priority, setPriority] = useState('Medium')
+  // TODO LAB4-R04: คำนวณ summary เป็น derived data
+  const summary = {
+    total: requests.length,
+    pending: requests.filter((request) => request.status === "pending").length,
+    inProgress: requests.filter((request) => request.status === "in-progress")
+      .length,
+    completed: requests.filter((request) => request.status === "completed")
+      .length,
+  };
 
-  const handleAddRequest = (e) => {
-    e.preventDefault()
-    if (!title.trim() || !location.trim()) return
+  // TODO LAB4-R08: คำนวณ filteredRequests จาก requests + statusFilter
+  const filteredRequests =
+    statusFilter === "all"
+      ? requests
+      : requests.filter((request) => request.status === statusFilter);
 
-    const newReq = {
-      id: Date.now().toString(),
-      title: title.trim(),
-      location: location.trim(),
-      priority,
-      status: 'Pending'
-    }
-
-    setRequests([newReq, ...requests])
-    setTitle('')
-    setLocation('')
-    setPriority('Medium')
+  function handleAddRequest(requestData) {
+    setRequests((currentRequests) => {
+      const nextNumber = currentRequests.length + 1;
+      const newRequest = {
+        id: `REQ-${String(nextNumber).padStart(3, "0")}`,
+        ...requestData,
+        status: "pending",
+      };
+      return [newRequest, ...currentRequests];
+    });
   }
 
-  const handleDelete = (id) => {
-    setRequests(requests.filter(item => item.id !== id))
+  function handleDeleteRequest(requestId) {
+    setRequests((currentRequests) =>
+      currentRequests.filter((request) => request.id !== requestId),
+    );
   }
 
   return (
-    <div className="container">
-      <header className="header">
-        <h1>Campus Service Request</h1>
-        <p>ระบบแจ้งซ่อมและบริการภายในมหาวิทยาลัย</p>
-      </header>
-
-      <form onSubmit={handleAddRequest}>
-        <div className="form-group">
-          <label htmlFor="req-title">หัวข้อแจ้งซ่อม / ปัญหา</label>
-          <input
-            id="req-title"
-            type="text"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            placeholder="ระบุชื่อปัญหา"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="req-loc">สถานที่ / ห้อง</label>
-          <input
-            id="req-loc"
-            type="text"
-            value={location}
-            onChange={(e) => setLocation(e.target.value)}
-            placeholder="เช่น อาคาร 4 ห้อง 402"
-            required
-          />
-        </div>
-
-        <div className="form-group">
-          <label htmlFor="req-priority">ระดับความสำคัญ</label>
-          <select
-            id="req-priority"
-            value={priority}
-            onChange={(e) => setPriority(e.target.value)}
-          >
-            <option value="Low">Low</option>
-            <option value="Medium">Medium</option>
-            <option value="High">High</option>
-          </select>
-        </div>
-
-        <button type="submit" className="btn-submit">ส่งคำร้อง</button>
-      </form>
-
-      <div className="card-list">
-        <h3>รายการคำร้อง ({requests.length})</h3>
-        {requests.map((item) => (
-          <div key={item.id} className="request-card">
-            <div>
-              <strong>{item.title}</strong>
-              <div>สถานที่: {item.location} | ความสำคัญ: {item.priority} | สถานะ: {item.status}</div>
+    <>
+      <AppHeader
+        title="Campus Service Request"
+        subtitle="LAB 4 Starter — เปลี่ยน DOM-driven UI เป็น State-driven React UI"
+      />
+      <main className="container page-content">
+        <SummaryPanel summary={summary} />
+        <div className="workspace-grid">
+          <RequestForm onAddRequest={handleAddRequest} />
+          <section className="panel" aria-labelledby="request-list-title">
+            <div className="section-heading">
+              <h2 id="request-list-title">รายการคำร้อง</h2>
+              <FilterBar
+                value={statusFilter}
+                onFilterChange={setStatusFilter}
+              />{" "}
             </div>
-            <button type="button" className="btn-delete" onClick={() => handleDelete(item.id)}>
-              ลบ
-            </button>
-          </div>
-        ))}
-      </div>
-    </div>
-  )
+            <RequestList
+              requests={filteredRequests}
+              onDeleteRequest={handleDeleteRequest}
+            />
+          </section>
+        </div>
+      </main>
+    </>
+  );
 }
+
+export default App;
