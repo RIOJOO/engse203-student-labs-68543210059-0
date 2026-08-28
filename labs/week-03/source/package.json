@@ -1,32 +1,19 @@
 {
-  "name": "engse203-lab03-68543210059-0",
-  "version": "0.0.0",
+  "name": "engse203-student-labs-685432100590",
+  "version": "2.1.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "vite": "^8.1.1"
-  },
-  "description": "",
-  "main": "index.js",
-  "dependencies": {
-    "detect-libc": "^2.1.2",
-    "fdir": "^6.5.0",
-    "lightningcss": "^1.32.0",
-    "lightningcss-linux-x64-gnu": "^1.32.0",
-    "nanoid": "^3.3.16",
-    "picocolors": "^1.1.1",
-    "picomatch": "^4.0.5",
-    "postcss": "^8.5.19",
-    "rolldown": "^1.1.5",
-    "source-map-js": "^1.2.1",
-    "tinyglobby": "^0.2.17"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+    "setup": "node scripts/setup-student-repo.mjs",
+    "add:lab": "node scripts/add-lab.mjs",
+    "import:source": "node scripts/import-source.mjs",
+    "import:publish": "node scripts/import-publish.mjs",
+    "build:pages": "node scripts/build-pages.mjs",
+    "verify:setup": "node scripts/verify-repository.mjs --setup",
+    "verify": "node scripts/verify-repository.mjs",
+    "verify:lab": "node scripts/verify-repository.mjs --week"
+  }
 }
