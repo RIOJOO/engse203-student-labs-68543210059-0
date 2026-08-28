@@ -5,7 +5,7 @@
   "sourceOrigin": "course-starter",
   "originalRepoUrl": "",
   "originalCommit": "",
-  "pullRequestUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0/pull/2",
+  "pullRequestUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0/pull/4",
   "submissionTag": "lab-03-submission-v1",
   "testStatus": "pass",
   "notes": "npm check และ build ผ่าน ทดสอบ Desktop, Mobile 375px, validation, live preview, submit interaction และ Console แล้ว"
