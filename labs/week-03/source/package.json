@@ -1,19 +1,14 @@
 {
-  "name": "engse203-student-labs-685432100590",
-  "version": "2.1.0",
+  "name": "engse203-lab03-68543210059-0",
+  "version": "0.0.0",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": ">=22.12.0"
-  },
   "scripts": {
-    "setup": "node scripts/setup-student-repo.mjs",
-    "add:lab": "node scripts/add-lab.mjs",
-    "import:source": "node scripts/import-source.mjs",
-    "import:publish": "node scripts/import-publish.mjs",
-    "build:pages": "node scripts/build-pages.mjs",
-    "verify:setup": "node scripts/verify-repository.mjs --setup",
-    "verify": "node scripts/verify-repository.mjs",
-    "verify:lab": "node scripts/verify-repository.mjs --week"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.14"
   }
 }
