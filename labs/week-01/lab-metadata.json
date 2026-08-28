@@ -1,12 +1,13 @@
 {
   "week": "week-01",
   "title": "Developer Environment & GitHub Repository Setup",
-  "status": "draft",
+  "status": "submitted",
   "sourceOrigin": "course-starter",
   "originalRepoUrl": "",
   "originalCommit": "",
-  "pullRequestUrl": "",
-  "submissionTag": "",
-  "testStatus": "not-tested",
+  "pullRequestUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0/pull/1",
+  "submissionTag": "lab-01-submission-v1",
+  "testStatus": "pass",
   "notes": "LAB 1 ใช้ evidence report ได้โดยไม่ต้องมี web application"
 }
+ 

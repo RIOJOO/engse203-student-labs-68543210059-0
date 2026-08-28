@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ENGSE203 Learning Dashboard</title>
+    <script type="module" crossorigin src="./assets/index-DTo3fjN8.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-Dc8H3a-a.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <h1>ENGSE203 Learning Dashboard</h1>
+      <p>ระบบติดตามแผนการเรียนรู้และงานฝึกปฏิบัติประจำรายวิชา</p>
+    </header>
+
+    <main class="dashboard-container">
+      <div id="status-message" class="status-box" role="status"></div>
+      <section id="summary-section" class="summary-grid"></section>
+      <section class="controls-panel">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="ค้นหาตามชื่อหรือหัวข้อ..."
+          aria-label="Search tasks"
+        />
+        <select id="filter-select" aria-label="Filter status">
+          <option value="All">All</option>
+          <option value="To do">To do</option>
+          <option value="In progress">In progress</option>
+          <option value="Done">Done</option>
+        </select>
+      </section>
+      <section id="task-list" class="task-grid"></section>
+    </main>
+
+  </body>
+</html>
