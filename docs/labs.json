@@ -4,7 +4,7 @@
     "title": "Developer Environment & GitHub Repository Setup",
     "status": "submitted",
     "sourceOrigin": "course-starter",
-    "originalRepoUrl": "",
+    "originalRepoUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0",
     "originalCommit": "",
     "pullRequestUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0/pull/1",
     "submissionTag": "lab-01-submission-v1",
@@ -20,7 +20,7 @@
     "title": "Modern JavaScript Learning Dashboard",
     "status": "submitted",
     "sourceOrigin": "course-starter",
-    "originalRepoUrl": "",
+    "originalRepoUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0",
     "originalCommit": "",
     "pullRequestUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0-New/pull/1",
     "submissionTag": "lab-02-submission-v1",
@@ -36,7 +36,7 @@
     "title": "Responsive Web UI & Form Interaction",
     "status": "submitted",
     "sourceOrigin": "course-starter",
-    "originalRepoUrl": "",
+    "originalRepoUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0",
     "originalCommit": "",
     "pullRequestUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0/pull/4",
     "submissionTag": "lab-03-submission-v1",
@@ -61,6 +61,6 @@
     "pageUrl": "https://RIOJOO.github.io/engse203-student-labs-685432100590/labs/week-04/",
     "sourceUrl": "https://github.com/RIOJOO/engse203-student-labs-685432100590/tree/lab/week-04/labs/week-04/source",
     "hasPublish": true,
-    "sourceEntries": 5
+    "sourceEntries": 7
   }
 ]
