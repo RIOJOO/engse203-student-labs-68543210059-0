@@ -1,48 +1,70 @@
-export function renderStatus(container, message, type = 'info') {
-  if (!message) {
-    container.textContent = '';
-    container.className = 'status-box hidden';
-    return;
-  }
-  container.className = `status-box status-${type}`;
-  container.textContent = message;
+import { getStatusLabel } from "./utils.js";
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (character) => {
+    const map = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return map[character];
+  });
 }
 
-export function renderSummary(container, summary) {
+export function setMessage(element, type, text) {
+  element.className = `message ${type}`;
+  element.textContent = text;
+}
+
+export function renderStats(element, stats) {
   const cards = [
-    { label: 'Total', value: summary.total, key: 'total' },
-    { label: 'To do', value: summary.todo, key: 'todo' },
-    { label: 'In progress', value: summary.inProgress, key: 'in-progress' },
-    { label: 'Done', value: summary.done, key: 'done' },
+    ["Total", stats.total],
+    ["To do", stats.todo],
+    ["In progress", stats.doing],
+    ["Done", stats.done],
   ];
 
-  container.innerHTML = cards
+  element.innerHTML = cards
     .map(
-      (c) => `
-      <div class="summary-card card-${c.key}">
-        <h3>${c.label}</h3>
-        <p class="summary-value">${c.value}</p>
-      </div>`
+      ([label, count]) => `
+        <article class="stat-card">
+          <span>${label}</span>
+          <strong>${count}</strong>
+        </article>
+      `,
     )
-    .join('');
+    .join("");
 }
 
-export function renderTasks(container, tasks = []) {
+export function renderTasks(element, tasks) {
   if (tasks.length === 0) {
-    container.innerHTML = '<p class="empty-state">ไม่พบรายการที่ตรงกับเงื่อนไข</p>';
+    element.innerHTML = `
+      <article class="empty-state">
+        <h2>ไม่พบรายการที่ตรงกับเงื่อนไข</h2>
+        <p>ลองเปลี่ยนคำค้นหาหรือตัวกรองสถานะ</p>
+      </article>
+    `;
     return;
   }
 
-  container.innerHTML = tasks
+  element.innerHTML = tasks
     .map(
-      (task) => `
-      <article class="task-card">
-        <div class="task-header">
-          <span class="badge badge-${task.status.toLowerCase().replace(/\s+/g, '-')}">${task.status}</span>
-        </div>
-        <h4 class="task-title">${task.title}</h4>
-        <p class="task-topic">${task.topic}</p>
-      </article>`
+      ({ week, title, topic, status, tags = [] }) => `
+        <article class="task-card">
+                  <div class="task-meta">
+            <span class="badge">Week ${week}</span>
+            <span class="badge status-${escapeHtml(status)}">${getStatusLabel(status)}</span>
+          </div>
+          <h2>${escapeHtml(title)}</h2>
+          <p>${escapeHtml(topic)}</p>
+          <div class="tags">
+            ${tags.map((tag) => `<span class="tag">${escapeHtml(tag)}</span>`).join("")}
+          </div>
+        </article>
+      `,
     )
-    .join('');
+    .join("");
 }

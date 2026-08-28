@@ -1,18 +1,21 @@
-export async function fetchTasks() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const simulateError = urlParams.get('simulateError') === '1';
-
-  const baseUrl = import.meta.env.BASE_URL || './';
-  const targetUrl = `${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}data/learning-tasks.json`;
-
+export async function fetchLearningTasks({ simulateError = false } = {}) {
   if (simulateError) {
-    throw new Error('เกิดข้อผิดพลาดในการโหลดข้อมูล (จำลองข้อผิดพลาด ?simulateError=1)');
+    throw new Error("Simulated error: data source is unavailable");
   }
 
-  const response = await fetch(targetUrl);
+  // เรียกไปยังโฟลเดอร์ data/learning-tasks.json โดยตรง
+  const url = "./data/learning-tasks.json";
+  const response = await fetch(url);
+
   if (!response.ok) {
-    throw new Error(`ไม่สามารถโหลดข้อมูลได้: HTTP ${response.status}`);
+    throw new Error(`Unable to load tasks (HTTP ${response.status})`);
   }
 
-  return await response.json();
+  const tasks = await response.json();
+
+  if (!Array.isArray(tasks)) {
+    throw new Error("The data source returned an invalid task collection");
+  }
+
+  return tasks;
 }
