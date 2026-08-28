@@ -1,12 +1,12 @@
 {
   "week": "week-02",
   "title": "Modern JavaScript Learning Dashboard",
-  "status": "draft",
+  "status": "submitted",
   "sourceOrigin": "course-starter",
   "originalRepoUrl": "",
   "originalCommit": "",
-  "pullRequestUrl": "",
-  "submissionTag": "",
-  "testStatus": "not-tested",
+  "pullRequestUrl": "https://github.com/RIOJOO/engse203-student-labs-68543210059-0-New/pull/1",
+  "submissionTag": "lab-02-submission-v1",
+  "testStatus": "pass",
   "notes": "นำ Vite build output ที่มี index.html เข้า publish/"
 }
