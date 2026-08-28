@@ -1,32 +1,22 @@
-export const STATUS_LABELS = {
-  todo: "To do",
-  doing: "In progress",
-  done: "Done",
-};
-
-export function getStatusLabel(status) {
-  return STATUS_LABELS[status] ?? "Unknown";
+export function calculateSummary(tasks = []) {
+  return {
+    total: tasks.length,
+    todo: tasks.filter((t) => t.status === 'To do').length,
+    inProgress: tasks.filter((t) => t.status === 'In progress').length,
+    done: tasks.filter((t) => t.status === 'Done').length,
+  };
 }
 
-export function filterTasks(tasks, { query = "", status = "all" } = {}) {
+export function filterTasks(tasks = [], query = '', status = 'All') {
   const normalizedQuery = query.trim().toLowerCase();
 
-  return tasks
-    .filter((task) => status === "all" || task.status === status)
-    .filter(({ title, topic, tags = [] }) => {
-      const searchableText = [title, topic, ...tags].join(" ").toLowerCase();
-      return searchableText.includes(normalizedQuery);
-    })
-    .sort((first, second) => first.week - second.week);
-}
+  return tasks.filter((task) => {
+    const matchQuery =
+      (task.title && task.title.toLowerCase().includes(normalizedQuery)) ||
+      (task.topic && task.topic.toLowerCase().includes(normalizedQuery));
 
-export function getStats(tasks) {
-  return tasks.reduce(
-    (stats, { status }) => ({
-      ...stats,
-      total: stats.total + 1,
-      [status]: (stats[status] ?? 0) + 1,
-    }),
-    { total: 0, todo: 0, doing: 0, done: 0 },
-  );
+    const matchStatus = status === 'All' || task.status === status;
+
+    return matchQuery && matchStatus;
+  });
 }

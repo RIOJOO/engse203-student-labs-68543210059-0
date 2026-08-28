@@ -1,64 +1,56 @@
-import "./style.css";
-import { fetchLearningTasks } from "./api.js";
-import { filterTasks, getStats } from "./utils.js";
-import { renderStats, renderTasks, setMessage } from "./ui.js";
-
-const elements = {
-  message: document.querySelector("#app-message"),
-  stats: document.querySelector("#stats"),
-  taskList: document.querySelector("#task-list"),
-  search: document.querySelector("#search"),
-  status: document.querySelector("#status-filter"),
-};
+import { fetchTasks } from './api.js';
+import { calculateSummary, filterTasks } from './utils.js';
+import { renderStatus, renderSummary, renderTasks } from './ui.js';
 
 const state = {
   tasks: [],
-  query: "",
-  status: "all",
+  searchQuery: '',
+  filterStatus: 'All',
 };
 
-function render() {
-  const visibleTasks = filterTasks(state.tasks, {
-    query: state.query,
-    status: state.status,
-  });
+const dom = {
+  status: document.getElementById('status-message'),
+  summary: document.getElementById('summary-section'),
+  taskList: document.getElementById('task-list'),
+  search: document.getElementById('search-input'),
+  filter: document.getElementById('filter-select'),
+};
 
-  renderStats(elements.stats, getStats(state.tasks));
-  renderTasks(elements.taskList, visibleTasks);
+function updateView() {
+  const filtered = filterTasks(state.tasks, state.searchQuery, state.filterStatus);
+  renderTasks(dom.taskList, filtered);
 }
 
-async function loadDashboard() {
+function attachEvents() {
+  dom.search.addEventListener('input', (e) => {
+    state.searchQuery = e.target.value;
+    updateView();
+  });
+
+  dom.filter.addEventListener('change', (e) => {
+    state.filterStatus = e.target.value;
+    updateView();
+  });
+}
+
+async function init() {
+  attachEvents();
+  renderStatus(dom.status, 'กำลังโหลดข้อมูล...', 'loading');
+
   try {
-    setMessage(elements.message, "loading", "กำลังโหลดข้อมูล...");
-    const params = new URLSearchParams(window.location.search);
+    const data = await fetchTasks();
+    state.tasks = data;
 
-    state.tasks = await fetchLearningTasks({
-      simulateError: params.get("simulateError") === "1",    });
+    renderStatus(dom.status, 'โหลดข้อมูลสำเร็จ', 'success');
+    renderSummary(dom.summary, calculateSummary(state.tasks));
+    updateView();
 
-    render();
-    setMessage(elements.message, "success", `โหลดข้อมูล ${state.tasks.length} รายการแล้ว`);
+    setTimeout(() => {
+      renderStatus(dom.status, '');
+    }, 2500);
   } catch (error) {
-    console.error("Unable to load dashboard:", error);
-    elements.stats.innerHTML = "";
-    elements.taskList.innerHTML = "";
-    setMessage(
-      elements.message,
-      "error",
-      `ไม่สามารถโหลดข้อมูลได้: ${error.message}`,
-    );
-  } finally {
-    console.info("Learning Dashboard load attempt finished.");
+    renderStatus(dom.status, error.message, 'error');
   }
 }
 
-elements.search.addEventListener("input", (event) => {
-  state.query = event.target.value;
-  render();
-});
-
-elements.status.addEventListener("change", (event) => {
-  state.status = event.target.value;
-  render();
-});
-
-loadDashboard();
+init();
