@@ -1,6 +1,6 @@
 import { defineConfig } from "vite";
 
-const repositoryName = "engse203-lab02-68543210009-5";
+const repositoryName = "engse203-lab02-68543210059-0";
 
 export default defineConfig({
   base: `/${repositoryName}/labs/week-02/`,
