@@ -5,7 +5,7 @@ function PriorityBadge({ priority }) {
   if (priority === 'normal') {
     return <span className="priority-badge priority-normal">ปกติ</span>;
   }
-  return null;
+  return <span className="priority-badge priority-unknown">ไม่ระบุ</span>;
 }
 
 export default PriorityBadge;
