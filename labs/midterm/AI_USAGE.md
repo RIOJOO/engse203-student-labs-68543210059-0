@@ -17,3 +17,4 @@
 |12.54|b2   |ทำ input  ค้นหา | สร้าง input ค้นหาให้ |
 |13.12|b2.2 |กรองรายการทำที่ requesterName หรือ details | ช่วยแก้โค้ดให้เพิ่มวิธีการกรอง เช่น พิมพ์ห้อง อันไหนที่มีคำว่าห้องก็จะขึ้นมาให้ |
 |13.21|b2.3 | 
+{/* TODO B3: เพิ่ม onMarkDone={handleMarkDone} และเขียน handleMarkDone ให้เรียก updateRequestStatus แล้ว setRequests เพื่อให้ summary อัปเดต + รอด refresh */}
