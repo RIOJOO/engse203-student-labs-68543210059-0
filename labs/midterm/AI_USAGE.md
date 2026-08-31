@@ -6,10 +6,12 @@
 
 | เวลา | งาน (B1/B2/B3/B4) | ถาม AI ว่าอะไร | ใช้คำตอบส่วนไหน | แก้เอง/ตรวจสอบอย่างไร |
 |---|---|---|---|---|
-|11.04|B1 |ให้AIช่วยหา bugs ทั้ง 6| | | 
-| 11.20|B1 |แคปโค้ดตัว RequestList.jsx | AI ให้เพิ่มโค้ดบรรทัด 9 |ทำการเพิ่มโค้ด key={request.id} ในบรรทัดที่ 9 | 
-| 11.38|B1 |AI ช่วยหา bugs B1.2|AI ให้แก้บรรทัด 47 เปลี่ยนจาก completed เป็น pending | 
-| 11.49|B3 |AI ช่วยหา bugs B1.3 |AI ให้แก้บรรทัด 55 เปลี่ยน !== เป็น === | 
-|12.01|B4 |AI ช่วยหา bugs B1.4 |แก้บรรทัด 28 เพราะใส่แค่ reloadkey ไม่ใส่ requestId |
-| 12.22|B5 |AI ช่วยหา bugs B1.5 |เปลี่ยนจาก setRequests(requests); เป็น setRequests(nextRequests); | 
-| 12.32|B6 |AI ช่วยหา bugs B1.6 |เติม await ลงใน resetrequest | 
+|11.04|B1.1 |ให้AIช่วยหา bugs ทั้ง 6| | | 
+|11.20|B1.1 |แคปโค้ดตัว RequestList.jsx | AI ให้เพิ่มโค้ดบรรทัด 9 |ทำการเพิ่มโค้ด key={request.id} ในบรรทัดที่ 9 | 
+|11.38|B1.2 |AI ช่วยหา bugs B1.2|AI ให้แก้บรรทัด 47 เปลี่ยนจาก completed เป็น pending | 
+|11.49|B1.3 |AI ช่วยหา bugs B1.3 |AI ให้แก้บรรทัด 55 เปลี่ยน !== เป็น === | 
+|12.01|B1.4 |AI ช่วยหา bugs B1.4 |แก้บรรทัด 28 เพราะใส่แค่ reloadkey ไม่ใส่ requestId |
+|12.22|B1.5 |AI ช่วยหา bugs B1.5 |เปลี่ยนจาก setRequests(requests); เป็น setRequests(nextRequests); | 
+|12.32|B1.6 |AI ช่วยหา bugs B1.6 |เติม await ลงใน resetrequest | 
+|12.50|B2   |ช่วยทำ state สำหรับข้อความ | ใช้สร้าง state สำหรับข้อความ |
+|12.54|b2.  |ทำ input  ค้นหา | สร้าง input ค้นหาให้ |
