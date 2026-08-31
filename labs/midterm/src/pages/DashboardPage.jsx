@@ -16,6 +16,7 @@ function DashboardPage() {
   const [requests, setRequests] = useState([]);
   const [statusFilter, setStatusFilter] = useState('all');
   // TODO B2: เพิ่ม state สำหรับข้อความค้นหา ที่นี่
+  const [searchTerm, setSearchTerm] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [notice, setNotice] = useState('');
 
