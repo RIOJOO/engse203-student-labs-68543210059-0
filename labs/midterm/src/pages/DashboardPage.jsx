@@ -6,7 +6,7 @@ import LoadingState from '../components/LoadingState.jsx';
 import RequestList from '../components/RequestList.jsx';
 import SummaryPanel from '../components/SummaryPanel.jsx';
 import useManualReload from '../hooks/useManualReload.js';
-import { deleteRequest, getRequests, resetRequests } from '../services/requestService.js';
+import { deleteRequest, getRequests, resetRequests, updateRequestStatus } from '../services/requestService.js';
 
 function DashboardPage() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -87,6 +87,15 @@ function DashboardPage() {
     }
   }
 
+  async function handleUpdateStatus(requestId, nextStatus) {
+    try {
+      const nextRequests = await updateRequestStatus(requestId, nextStatus);
+      setRequests(nextRequests);
+    } catch (error) {
+      setNotice(error instanceof Error ? error.message : 'อัปเดตสถานะไม่สำเร็จ');
+    }
+  }
+
   return (
     <section data-testid="page-dashboard">
       <div className="page-heading">
@@ -120,7 +129,11 @@ function DashboardPage() {
               <p className="subtle-empty">ไม่พบคำร้องที่ตรงกับการค้นหา</p>
             ) : (
               
-              <RequestList requests={filteredRequests} onDeleteRequest={handleDelete} />
+            <RequestList
+              requests={filteredRequests}
+              onDeleteRequest={handleDelete}
+              onMarkDone={(requestId) => handleUpdateStatus(requestId, 'completed')}
+            />
             )}
           </section>
         </>
