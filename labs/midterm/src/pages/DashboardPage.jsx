@@ -51,13 +51,14 @@ function DashboardPage() {
   }), [requests]);
 
   const filteredRequests = requests.filter((request) => {
+    const matchesStatus = statusFilter === 'all' || request.status === statusFilter;
+
     const term = searchTerm.trim().toLowerCase();
-    if (!term) return true;
+    const matchesSearch = term === '' ||
+      request.requesterName.toLowerCase().includes(term) ||
+      request.details.toLowerCase().includes(term);
 
-    const matchesName = request.requesterName.toLowerCase().includes(term);
-    const matchesDetails = request.details.toLowerCase().includes(term);
-
-    return matchesName || matchesDetails;
+    return matchesStatus && matchesSearch;
   });
 
   function handleRetry() {
