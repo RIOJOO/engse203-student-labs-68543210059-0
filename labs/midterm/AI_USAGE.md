@@ -12,3 +12,4 @@
 | 11.49|B3 |AI ช่วยหา bugs B1.3 |AI ให้แก้บรรทัด 55 เปลี่ยน !== เป็น === | 
 |12.01|B4 |AI ช่วยหา bugs B1.4 |แก้บรรทัด 28 เพราะใส่แค่ reloadkey ไม่ใส่ requestId |
 | 12.22|B5 |AI ช่วยหา bugs B1.5 |เปลี่ยนจาก setRequests(requests); เป็น setRequests(nextRequests); | 
+| 12.32|B6 |AI ช่วยหา bugs B1.6 |เติม await ลงใน resetrequest | 
