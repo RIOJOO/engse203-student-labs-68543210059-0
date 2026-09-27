@@ -1,0 +1,12 @@
+{
+  "week": "week-05",
+  "title": "React Campus Service Request",
+  "status": "ready",
+  "sourceOrigin": "course-starter",
+  "originalRepoUrl": "",
+  "originalCommit": "",
+  "pullRequestUrl": "",
+  "submissionTag": "",
+  "testStatus": "pass",
+  "notes": "ทำโจทย์ 5A และ 5B ครบถ้วน, แก้ไขบั๊ก Template Literal ในการสร้าง ID, จัดการ Persistence และทำ Cleanup Guard เรียบร้อยผ่าน 133/133"
+}
