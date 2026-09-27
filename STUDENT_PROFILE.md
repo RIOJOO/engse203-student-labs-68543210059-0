@@ -4,7 +4,7 @@
 |---|---|
 | รายวิชา | ENGSE203 การเขียนโปรแกรมสำหรับวิศวกรซอฟต์แวร์ |
 | รหัสนักศึกษา | 685432100590 |
-| ชื่อ-นามสกุล | Surabordin Panyalek |
+| ชื่อ-นามสกุล | สุรบดินทร์ ปัญญาเหล็ก |
 | Section | SEC1 |
 | GitHub Username | RIOJOO |
 | Repository | `engse203-student-labs-685432100590` |
