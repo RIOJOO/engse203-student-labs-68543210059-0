@@ -12,7 +12,7 @@
  */
 
 // TODO 5B-1: เปิดใช้บรรทัดล่างนี้เมื่อถึงคาบ 5B
-// import { clearStoredRequests, readStoredRequests, writeStoredRequests } from './requestStorage.js';
+import { clearStoredRequests, readStoredRequests, writeStoredRequests } from './requestStorage.js';
 
 const LAB_DELAY_MS = 420;
 
@@ -73,7 +73,7 @@ export async function getRequests(options = {}) {
 
   // TODO 5A-2: return fetchSeedRequests();
   // TODO 5B-3: เปลี่ยนบรรทัดข้างบนเป็น return loadNormalRequests(options.onRecovery);
-  return fetchSeedRequests();
+  return loadNormalRequests(options.onRecovery);
 }
 
 /**
@@ -100,9 +100,20 @@ export async function getRequestById(requestId) {
  *   4. ถ้า status เป็น 'invalid' ให้เรียก onRecovery?.(ข้อความ) เพื่อให้หน้าจอแจ้งผู้ใช้
  *   5. คืนข้อมูล seed
  */
-// async function loadNormalRequests(onRecovery) {
-//   throw new Error('TODO 5B-2: loadNormalRequests');
-// }
+async function loadNormalRequests(onRecovery) {
+  const stored = readStoredRequests();
+  if (stored.status === 'valid') return stored.requests;
+
+  const seedRequests = await fetchSeedRequests();
+  writeStoredRequests(seedRequests);
+
+  // TODO 5B-2b: แจ้งผู้ใช้เมื่อกู้ข้อมูลจากของเสีย (ทำใน CP04b)
+  if (stored.status === 'invalid') {
+    onRecovery?.('พบข้อมูลเสียหายในเครื่อง ระบบกู้คืนด้วยข้อมูลตัวอย่างเริ่มต้นแล้ว');
+  }
+
+  return seedRequests;
+}
 
 /**
  * TODO 5B-4 · เพิ่มคำร้องใหม่
@@ -114,9 +125,59 @@ export async function getRequestById(requestId) {
  *   4. status เริ่มต้นเป็น 'pending' เสมอ
  *   5. persist แล้วคืน object ใหม่
  */
+function readText(value) {
+  return typeof value === 'string' ? value.trim() : '';
+}
+
+function validateRequestInput(input) {
+  if (!input || typeof input !== 'object') {
+    throw new Error('ข้อมูลคำร้องไม่ถูกต้อง');
+  }
+
+  const title = readText(input.title || input.requesterName || input.topic);
+  if (title.length < 2) {
+    throw new Error('หัวข้อคำร้องต้องมีอย่างน้อย 2 ตัวอักษร');
+  }
+}
+
+function createRequestId(requests) {
+  let maxId = 0;
+  for (const r of requests) {
+    const match = r.id?.match(/^REQ-(\d+)$/);
+    if (match) {
+      const num = parseInt(match[1], 10);
+      if (num > maxId) maxId = num;
+    }
+  }
+  return `REQ-${String(maxId + 1).padStart(3, '0')}`;
+}
+
 export async function addRequest(requestInput) {
-  void requestInput;
-  throw new Error('TODO 5B-4: addRequest');
+  validateRequestInput(requestInput);
+
+  const requests = await getRequests();
+  const title = readText(requestInput.title || requestInput.requesterName || inputFallback(requestInput));
+
+  // ตัดช่องว่างหัวท้ายทุก field ที่เป็นข้อความ
+  const cleanInput = {};
+  for (const [key, value] of Object.entries(requestInput)) {
+    cleanInput[key] = typeof value === 'string' ? value.trim() : value;
+  }
+
+  const newRequest = {
+    ...cleanInput,
+    id: createRequestId(requests),
+    title: cleanInput.title ?? title,
+    status: 'pending',
+  };
+
+  const nextRequests = [newRequest, ...requests];
+  writeStoredRequests(nextRequests);
+  return structuredClone(newRequest);
+}
+
+function inputFallback(input) {
+  return input.topic || input.name || '';
 }
 
 /**
@@ -124,8 +185,10 @@ export async function addRequest(requestInput) {
  * ใช้ .filter() สร้าง array ใหม่ อย่าแก้ array เดิม แล้ว persist
  */
 export async function deleteRequest(requestId) {
-  void requestId;
-  throw new Error('TODO 5B-5: deleteRequest');
+  const requests = await getRequests();
+  const nextRequests = requests.filter((request) => request.id !== requestId);
+  writeStoredRequests(nextRequests);
+  return structuredClone(nextRequests);
 }
 
 /**
@@ -133,5 +196,8 @@ export async function deleteRequest(requestId) {
  * ล้างคีย์ของ LAB05 แล้วโหลด seed ใหม่ทับ
  */
 export async function resetRequests() {
-  throw new Error('TODO 5B-6: resetRequests');
+  clearStoredRequests();                // removeItem ไม่ใช่ clear()
+  const seedRequests = await fetchSeedRequests();
+  writeStoredRequests(seedRequests);
+  return structuredClone(seedRequests);
 }

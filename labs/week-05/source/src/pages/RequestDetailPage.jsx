@@ -12,30 +12,42 @@ function RequestDetailPage() {
   const [loadState, setLoadState] = useState('loading');
   const [request, setRequest] = useState(null);
   const [errorMessage, setErrorMessage] = useState('');
-
+  //clearup
   useEffect(() => {
+    let ignore = false;  //flag 
+
     setLoadState('loading');
     setErrorMessage('');
 
     getRequestById(requestId)
-      .then((result) => {
-        setRequest(result);
-        setLoadState('success');
+        .then((result) => {
+          //เช็คว่าถ้าผู้ใช้กดออกจากหน้านี้ไปแล้ว (ignore เป็น true) ให้ทิ้งข้อมูลไปเลย
+          if (ignore) return;
+          setRequest(result);
+          setLoadState('success');
       })
       .catch((error) => {
+        //ถ้าดึงข้อมูลพลาด ก็ต้องเช็คธงเหมือนกัน
+        if (ignore) return;
         setErrorMessage(error instanceof Error ? error.message : 'โหลดรายละเอียดไม่สำเร็จ');
         setLoadState('error');
       });
+      // คืนค่าฟังก์ชันสำหรับจัดการตอนที่ Component ถูก Unmount (ผู้ใช้กดเปลี่ยนหน้า)
+    return () => {
+      ignore = true; 
+    };
     // TODO 5B: เพิ่ม cleanup guard เพื่อกัน stale update
   }, [requestId, reloadKey]);
 
-    return (
+  return (
     <section data-testid="page-request-detail">
-      <div className="page-heading"><div>
-        <p className="eyebrow dark">ROUTED · DYNAMIC DETAIL</p>
-        <h1>รายละเอียดคำร้อง</h1>
-        <p>รหัสที่อ่านจาก URL: <code>{requestId}</code></p>
-      </div></div>
+      <div className="page-heading">
+        <div>
+          <p className="eyebrow dark">ROUTED · DYNAMIC DETAIL</p>
+          <h1>รายละเอียดคำร้อง</h1>
+          <p>รหัสที่อ่านจาก URL: <code>{requestId}</code></p>
+        </div>
+      </div>
 
       {loadState === 'loading' && <LoadingState message="กำลังโหลดรายละเอียด…" />}
       {loadState === 'error' && <ErrorState message={errorMessage} onRetry={reload} />}

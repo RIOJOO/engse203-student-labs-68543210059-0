@@ -29,7 +29,7 @@
     "pageUrl": "https://RIOJOO.github.io/engse203-student-labs-685432100590/labs/week-02/",
     "sourceUrl": "https://github.com/RIOJOO/engse203-student-labs-685432100590/tree/lab/week-02/labs/week-02/source",
     "hasPublish": true,
-    "sourceEntries": 9
+    "sourceEntries": 8
   },
   {
     "week": "week-03",
@@ -62,5 +62,21 @@
     "sourceUrl": "https://github.com/RIOJOO/engse203-student-labs-685432100590/tree/lab/week-04/labs/week-04/source",
     "hasPublish": false,
     "sourceEntries": 0
+  },
+  {
+    "week": "week-05",
+    "title": "React Campus Service Request",
+    "status": "draft",
+    "sourceOrigin": "course-starter",
+    "originalRepoUrl": "",
+    "originalCommit": "",
+    "pullRequestUrl": "",
+    "submissionTag": "",
+    "testStatus": "not-tested",
+    "notes": "ทำโจทย์ 5A และ 5B ครบถ้วน, แก้ไขบั๊ก Template Literal ในการสร้าง ID, จัดการ Persistence และทำ Cleanup Guard เรียบร้อยผ่าน 133/133",
+    "pageUrl": "https://RIOJOO.github.io/engse203-student-labs-685432100590/labs/week-05/",
+    "sourceUrl": "https://github.com/RIOJOO/engse203-student-labs-685432100590/tree/lab/week-05/labs/week-05/source",
+    "hasPublish": true,
+    "sourceEntries": 11
   }
 ]
