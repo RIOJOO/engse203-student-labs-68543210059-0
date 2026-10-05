@@ -10,6 +10,7 @@ import { apiFetch, ApiError } from './apiClient.js';
 
 export { ApiError };
 
+
 /**
  * TODO W07-F3 (CP11) · GET /api/requests
  * - คง scenario 'error' และ 'empty' ไว้เหมือนเดิม (ใช้ทดสอบสถานะหน้าจอ)
@@ -43,7 +44,10 @@ export async function getRequestById(requestId) {
  * - ส่ง body ด้วย JSON.stringify(requestInput)
  */
 export async function addRequest(requestInput) {
-  throw new Error('TODO W07-F5: addRequest');
+  return await apiFetch('/api/requests', {
+    method: 'POST',
+    body: JSON.stringify(requestInput),
+  });
 }
 
 /**
@@ -51,7 +55,10 @@ export async function addRequest(requestInput) {
  * body: { status }
  */
 export async function updateRequestStatus(requestId, status) {
-  throw new Error('TODO W07-F6: updateRequestStatus');
+  return await apiFetch(`/api/requests/${encodeURIComponent(requestId)}`, {
+    method: 'PUT',
+    body: JSON.stringify({ status }),
+  });
 }
 
 /**
